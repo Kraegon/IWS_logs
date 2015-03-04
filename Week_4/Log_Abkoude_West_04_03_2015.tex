@@ -136,6 +136,17 @@ Versie: 0.1.0
 
 Voor deze opdracht willen wij een remote REST server hebben om data mee op te slaan. Deze zal via Node.js ontvangen gegevens in een database opslaan. De structuur van de database is niet belangrijk, we zullen de algemene data opslaan in de velden ID (van de meeting, uniek, van Node.js script), Time (timestamp, van Node.js), Source(welk device, van zender), Type (van de meting, van zender), values (kan alles zijn, kunnen meerdere velden worden, van zender). \\
 De devices die we hebben stellen in met de opgelegde structuur. Allen in API mode, 1 coördinator, 2 routers en 2 end devices. De coördinator krijgt als bonus de ethernet shield, zodat deze de ontvangen data doorsluizen naar de REST server. De opstelling wordt weergegeven in figuur~\ref{fig:setup1}.\\
+Na veel gedoe en werk is een soort-van REST server opgezet in Node.js die via een HTTP POST actie met JSON als inhoud, deze data opslaan in een MySQL database. Deze JSON request moet opgebouwd zoals in het voorbeeld hieronder. Het "id" veld kan worden gegenereerd, en hoeft niet ingevoerd te worden. Als een "id" al voorkomt in de database, zal de post niet succesvol zijn. Een ietwat aangepast, maar nog functionele, versie van de Node.js code staat in bijlage 1.\\
+Figuren~\ref{fig:rest_test1} tot~\ref{fig:rest_test3} laten de werking van de REST server zien. \\
+Deze server had niet kunnen werken zonder de input en samenwerking van Joris, Guus en Jelle. Daarvoor heel erg bedankt. Als teken van dank helpen we elkaar om dit moment. 
+\begin{lstlisting}
+{
+	"id": x,
+	"meetopstellingen": x,
+	"timestamp": "jjjj-mm-dd hh:MM:ss",
+	"waarde": "string"
+}
+\end{lstlisting}
 \clearpage
 \begin{figure}
 \begin{center}
@@ -144,10 +155,74 @@ De devices die we hebben stellen in met de opgelegde structuur. Allen in API mod
 \label{fig:setup1}
 \end{center}
 \end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1]{Rest_test_1.png}
+\caption{MySQL resultaten na elke (succesvolle) insert}
+\label{fig:rest_test1}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.9]{Rest_test_2.png}
+\caption{Node output met 1. foutieve input 2. succesvolle input 3. succesvolle input}
+\label{fig:rest_test2}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.6]{Rest_test_3.png}
+\caption{POST debug tool, post zonder ID, return is succes}
+\label{fig:rest_test3}
+\end{center}
+\end{figure}
 \clearpage
+
 
 \section{Opdrachten}
 
+\subsection*{1a}
+Voor de setup die we hebben gemaakt, zie hoofdstuk 1. De PANID die wij hebben gekozen is 4016.
+\section{Bijlage}
+\subsection*{Bijlage 1}
+Beknopte versie van de Node.js code voor pseudo REST server om functionaliteit te testen. Commentaar is weggelaten.
+\begin{lstlisting}
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'us',
+  password : 'controller',
+  database : 'iws_week4'
+});
 
+var express    = require('express');
+var app        = express();  
+var bodyParser = require('body-parser');
+var port = process.env.PORT || 8080;
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
+var router = express.Router(); 
+
+connection.connect();
+
+router.route('/data').post(function(req, res) {
+    var post= req.body;
+	connection.query('INSERT INTO meetwaarde SET ?', post, function(error){
+	    if(error){
+	      console.log(error.message);
+	      res.json({ DBresult: 'insert failure' });
+	    }else{
+	      console.log('succes');
+	      res.json({ DBresult: 'insert success' });
+	    }
+  	});
+	
+});
+
+app.use('/iws', router);
+
+app.listen(port);
+console.log('Script started on ' + port);
+\end{lstlisting}
 \end{document}
