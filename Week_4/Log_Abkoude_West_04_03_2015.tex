@@ -134,7 +134,17 @@ Versie: 0.1.0
 \pagenumbering{arabic}
 \section{Setup}
 
-
+Voor deze opdracht willen wij een remote REST server hebben om data mee op te slaan. Deze zal via Node.js ontvangen gegevens in een database opslaan. De structuur van de database is niet belangrijk, we zullen de algemene data opslaan in de velden ID (van de meeting, uniek, van Node.js script), Time (timestamp, van Node.js), Source(welk device, van zender), Type (van de meting, van zender), values (kan alles zijn, kunnen meerdere velden worden, van zender). \\
+De devices die we hebben stellen in met de opgelegde structuur. Allen in API mode, 1 coördinator, 2 routers en 2 end devices. De coördinator krijgt als bonus de ethernet shield, zodat deze de ontvangen data doorsluizen naar de REST server. De opstelling wordt weergegeven in figuur~\ref{fig:setup1}.\\
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[scale=.4]{Test_setup_1.jpg}
+\caption{Initiële opstelling apparaten}
+\label{fig:setup1}
+\end{center}
+\end{figure}
+\clearpage
 
 \section{Opdrachten}
 
