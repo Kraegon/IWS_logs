@@ -10,11 +10,11 @@
 \usepackage{lastpage}
 \usepackage{fancyheadings}
 \hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black
 } %Set up hyperlink colours.
 \newcommand{\sectionbreak}{\clearpage} % Should start every section on its own page
 \usepackage{geometry} % Required to change the page size to A4
@@ -43,16 +43,16 @@
 \usepackage{listings}
 \usepackage[svgnames,table,xcdraw]{xcolor}
 \lstset { 
-    language=C,
-    frame=single,
-    escapeinside={\%*}{*)}, 
-    breaklines=true,  
-    backgroundcolor=\color{black!5},
-    basicstyle=\footnotesize,
-    commentstyle=\color{mygreen},
-    numberstyle=\tiny\color{mygray},
-    rulecolor=\color{black},
-    keywordstyle=\color{blue},
+language=C,
+frame=single,
+escapeinside={\%*}{*)}, 
+breaklines=true,  
+backgroundcolor=\color{black!5},
+basicstyle=\footnotesize,
+commentstyle=\color{mygreen},
+numberstyle=\tiny\color{mygray},
+rulecolor=\color{black},
+keywordstyle=\color{blue},
 }
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
@@ -140,14 +140,14 @@ De eerste taak met de XBee Serie 2 wireless radio modules was om de firmware te 
 Verder hebben we de adressen van de XBee modules in tabel~\ref{tab:info1} genoteerd. \\
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.25]{test_setup_1.jpg}
+\includegraphics[scale=.25]{Test_Setup_1.jpg}
 \caption{Initiële test setup}
 \label{fig:setup1}
 \end{figure}
 \end{center}
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.6]{Serial_Capture.jpg}
+\includegraphics[scale=.6]{Serial_Capture.JPG}
 \caption{Capture van data transfer in XCTU-NG}
 \label{fig:output1}
 \end{figure}
@@ -155,7 +155,7 @@ Verder hebben we de adressen van de XBee modules in tabel~\ref{tab:info1} genote
 \clearpage
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.8]{Terminal_Output.jpg}
+\includegraphics[scale=.8]{Terminal_output.JPG}
 \caption{Capture van data transfer in Hercules}
 \label{fig:output2}
 \end{figure}
@@ -181,7 +181,7 @@ Router C      & ...406A4282
 In onze setup hebben we grotendeels de opdracht uitgevoerd. We hadden niet de bestemming adres ingesteld tijdens onze initi\"{e}le setup. Nadat we het adres van de coordinator op de router programeerde en vice versa, was de communicatie weer mogelijk. De chat verliep zoals in figuur~\ref{fig:output3}.\\
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=1]{Serial_Capture_2.jpg}
+\includegraphics[scale=1]{Serial_Capture_2.JPG}
 \caption{Capture van data transfer in XCTU-NG met andere settings}
 \label{fig:output3}
 \end{figure}
@@ -193,28 +193,28 @@ Omdat 0 schrijven in XCTU-NG niet werkt, moesten we even via de terminal direct 
 Nadat we ATDL \& ATDH op de routers op 0 zetten en voor de co\"{o}rdinator ATDL op 0xFFFF \& ATDH op 0, was de communicatie succesvol. De coordinator stuurt een bericht naar alle Zigbee luisterende devices met PAN id 4016 en de routers sturen naar alleen de co\"{o}rdinator. Het bewijs is te zien in figuren~\ref{fig:output4} tot~\ref{fig:output6}
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.25]{test_setup_2.jpg}
+\includegraphics[scale=.25]{Test_Setup_2.jpg}
 \caption{Test setup voor 3 XBee modules}
 \label{fig:setup2}
 \end{figure}
 \end{center}
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.7]{coord_capture.jpg}
+\includegraphics[scale=.7]{coord_capture.JPG}
 \caption{Terminal capture van de co\"{o}rdinator}
 \label{fig:output4}
 \end{figure}
 \end{center}
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.7]{rout_capture.jpg}
+\includegraphics[scale=.7]{rout_capture.JPG}
 \caption{Terminal capture van de letterloze router}
 \label{fig:output5}
 \end{figure}
 \end{center}
 \begin{center}
 \begin{figure}[h]
-\includegraphics[scale=.7]{routA_capture.jpg}
+\includegraphics[scale=.7]{routA_capture.JPG}
 \caption{Terminal capture van router A}
 \label{fig:output6}
 \end{figure}
@@ -223,5 +223,194 @@ Nadat we ATDL \& ATDH op de routers op 0 zetten en voor de co\"{o}rdinator ATDL 
 %\subsection*{Opdracht 1c}
 %Als laatste hebben we de XBee via de Arduino uitgelezen en aangestuurd.
 %Dit komt later.
+\subsection{Opdracht 2a}
+De volgende codeblokken zijn de code die op de arduino's zijn gezet met xbee's.
+\begin{lstlisting}
+char* printerString = "malloc";
+int number = 100;
 
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Programme started");
+}
+void loop() {
+  sprintf(printerString, "%d", number);
+  Serial.write(printerString);
+  Serial.write('  ');
+  delay(1000);
+}
+\end{lstlisting}
+\begin{lstlisting}
+char* printerString = "malloc";
+int number = 200;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Programme started");
+}
+void loop() {
+  sprintf(printerString, "%d", number);
+  Serial.write(printerString);
+  Serial.write('  ');
+  delay(1000);
+}
+\end{lstlisting}
+\begin{center}
+\begin{figure}[h]
+\includegraphics[scale=0.7]{100-200.jpg}
+\caption{Terminal capture van router A}
+\label{fig:output7}
+\end{figure}   
+\end{center}
+\newpage
+\subsection{Opdracht 2b}
+\begin{center}
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Setup_3.jpg}
+\caption{Foto van de gebruikte installatie}
+\label{fig:output8}
+\end{figure}   
+\end{center}
+Code voor het uitlezen van de temperatuursensor:
+\begin{lstlisting}
+int readingPin = A5;
+int sensorValue = 0;
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  sensorValue = analogRead(readingPin);
+  //To celcius 
+  sensorValue *= 0.48828125;
+  Serial.print(sensorValue);
+  delay(10000);
+}
+\end{lstlisting}
+De code die nu volgt is de code om getallen te ontvangen en deze naar een RESTful API te sturen:
+\begin{lstlisting}
+#include <Ethernet.h>
+#include <EthernetUdp.h>
+#include <Dns.h>
+#include <time.h>
+#include <SPI.h>
+
+int incomingByte = 0;
+char buffer[20];
+const int dezeMeetopstelling = 1;
+//178.62.191.231
+IPAddress restServer(178, 62, 191, 231); //Backup
+String restServerString = "178.62.191.231";
+String restServerPort   = "8080";
+byte mac[] =
+{
+    0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED
+};
+
+
+void setup() {
+    Serial.begin(9600);
+    Serial.println("Programme started");
+    if (Ethernet.begin(mac) == 0)
+    {
+        Serial.println("Failed to configure Ethernet using DHCP");
+        // no point in carrying on, so do nothing forevermore:
+        for (;;);
+    }
+    else
+    {
+        Serial.print("Eth info \n Local IP: ");
+        Serial.println(Ethernet.localIP());
+        Serial.print("Subnet Mask: ");
+        Serial.println(Ethernet.subnetMask());
+        Serial.print("Gateway: ");
+        Serial.println(Ethernet.gatewayIP());
+        Serial.print("Primary DNS: ");
+        Serial.println(Ethernet.dnsServerIP());
+    }
+    DNSClient client;
+    client.begin(Ethernet.dnsServerIP());
+    if (client.getHostByName("zaku2.com", restServer) == 1)
+    {
+        Serial.print("resolved server to ");
+        Serial.print(restServer);
+    }
+    else
+    {
+        Serial.print("Unable to resolve IP, using default: ");
+        Serial.println(restServer);
+    }
+}
+
+void send_pack(int number)
+{
+    Serial.println("send_pack");
+    int contentLength;
+
+    EthernetClient client;
+
+    String jsonBody = String("{ \"meetopstellingen\": \""+String(dezeMeetopstelling)+"\","
+        //+"\"timestamp\": "+time.year()+"-"+time.month()+"-"+time.day()+" "+time.hour()+":"+time.minute()+":"+time.second() +"\","
+        +"\"waarde\": \"" + String(number)+"\"}");
+
+    if(client.connect(restServer,8080))
+    {
+        client.print("POST /iws/data HTTP/1.1");
+        // client.println("GET /api/newdeveloper/lights/4 HTTP/1.1");
+        client.print("Host: ");
+        client.print(String(restServerString+":"+restServerPort));
+        client.print("Connection: keep-alive"); 
+        client.print("Content-Type:   application/json; charset=UTF-8"); 
+        client.print("Content-Length: "); 
+        client.print(jsonBody.length());
+        client.print(""); 
+        client.print(jsonBody);
+        client.print(""); 
+
+        Serial.print("Sent package with body");
+        Serial.print(jsonBody);       
+        Serial.print(" and length ");
+        Serial.println(jsonBody.length());
+
+        while (!client.available())
+        {
+            delay(1);
+        }
+        while (client.available()) {
+            char c = client.read();
+            Serial.print(c);
+        }
+    }
+    else
+    {
+        Serial.println("Can\'t connect");
+    }
+}
+
+void loop() {
+    char index = 0;
+    while (Serial.available() > 0) 
+    {
+        // read the incoming byte:
+        if(Serial.available() > 0)
+        buffer[index++] = Serial.read();
+    }
+    if(buffer[0]!=0&&index!=0)
+    {
+        Serial.println("Ontvangen:");
+        Serial.println(buffer);
+        // send_pack(buffer); We still have to add something like this
+        int i = 0; while (i<21){buffer[i++]=0;} //clearing the bufffer
+        index = 0;
+    }
+
+    delay(1000);
+}
+\end{lstlisting}
+\begin{center}
+\begin{figure}[h]
+\includegraphics{Setup_4.jpg}
+\caption{Systeem opbouw temperatuur sensor}
+\label{fig:output9}
+\end{figure}   
+\end{center}
 \end{document}
