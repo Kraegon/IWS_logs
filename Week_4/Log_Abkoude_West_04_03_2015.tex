@@ -164,7 +164,7 @@ Deze server had niet kunnen werken zonder de input en samenwerking van Joris, Gu
 \end{figure}
 \begin{figure}
 \begin{center}
-\includegraphics[scale=.9]{Rest_test_2.png}
+\includegraphics[scale=.9]{Rest_test_2.PNG}
 \caption{Node output met 1. foutieve input 2. succesvolle input 3. succesvolle input}
 \label{fig:rest_test2}
 \end{center}
@@ -205,18 +205,18 @@ var router = express.Router();
 connection.connect();
 
 router.route('/data').post(function(req, res) {
-    var post= req.body;
-    connection.query('INSERT INTO meetwaarde SET ?', post, function(error){
-       if(error){
-         console.log(error.message);
-         res.json({ DBresult: 'insert failure' });
-         }else{
-             console.log('succes');
-             res.json({ DBresult: 'insert success' });
-         }
-         });
-    
-    });
+  var post= req.body;
+  connection.query('INSERT INTO meetwaarde SET ?', post, function(error){
+   if(error){
+     console.log(error.message);
+     res.json({ DBresult: 'insert failure' });
+     }else{
+       console.log('succes');
+       res.json({ DBresult: 'insert success' });
+     }
+     });
+  
+  });
 
 app.use('/iws', router);
 
