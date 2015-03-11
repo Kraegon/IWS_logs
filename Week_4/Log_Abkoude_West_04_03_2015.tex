@@ -181,6 +181,32 @@ Deze server had niet kunnen werken zonder de input en samenwerking van Joris, Gu
 
 \subsection*{1a}
 Voor de setup die we hebben gemaakt, zie hoofdstuk 1. De PANID die wij hebben gekozen is 4016.
+\subsection*{1b}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=.8]{API_network.png}
+\caption{Het netwerk zoals weergegeven in XCTU met 64- en 16-bit adres}
+\label{fig:api_net}
+\end{center}
+\end{figure}
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{lll}
+\rowcolor[HTML]{656565} 
+\textbf{Type} 	  & \textbf{64-bit adres: 0013A200...} & \textbf{16-bit adres}\\
+Co\"{o}rdinator   & ...40A20C86       &  0000	\\
+Router            & ...406A4273       &  B75F  \\
+Router A      	  & ...40A20CC8       &  EB99  \\
+End device B      	  & ...408B183C       & D6AB   \\
+End device C      	  & ...406A4282       &	B1A8	\\               
+\end{tabular}
+\end{center}
+\caption{Tabel van XBee modules en hun (lage) 64-bit adres}
+\label{tab:info1}
+\end{table}
+\clearpage
+
 \section{Bijlage}
 \subsection*{Bijlage 1}
 Beknopte versie van de Node.js code voor pseudo REST server om functionaliteit te testen. Commentaar is weggelaten.
